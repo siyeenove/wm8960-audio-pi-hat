@@ -1,4 +1,4 @@
-# WM8960 Audio HAT
+# wm8960 audio pi hat
 
 The drivers of [wm8960 audio pi hat] for Raspberry Pi.
 
@@ -78,7 +78,7 @@ alsamixer is a graphical mixer program for the Advanced Linux Sound Architecture
 If you want to upgrade the driver , you need uninstall the driver first.
 
 ```bash
-pi@raspberrypi:~/WM8960-Audio-HAT $ sudo ./uninstall.sh 
+pi@raspberrypi:~/wm8960-audio-pi-hat $ sudo ./uninstall.sh 
 ...
 
 ------------------------------------------------------
