@@ -1,19 +1,17 @@
 # WM8960 Audio HAT
 
-The drivers of [WM8960 Audio HAT] for Raspberry Pi.
+The drivers of [wm8960 audio pi hat] for Raspberry Pi.
 
-http://www.waveshare.net/shop/WM8960-Audio-HAT.htm
-
-http://www.waveshare.com/wm8960-audio-hat.htm
+http://siyeenove.com
 
 ### Install wm8960-soundcard
 Get the wm8960 soundcard source code. and install all linux kernel drivers
 
 ```bash
-git clone https://github.com/waveshare/WM8960-Audio-HAT
-cd WM8960-Audio-HAT
-sudo ./install.sh 
-sudo reboot
+pi@raspberrypi:~ $ git clone https://github.com/siyeenove/wm8960-audio-pi-hat
+pi@raspberrypi:~ $ cd wm8960-audio-pi-hat
+pi@raspberrypi:~/wm8960-audio-pi-hat $ sudo ./install.sh 
+pi@raspberrypi:~/wm8960-audio-pi-hat $ sudo reboot
 ```
 
 While the upstream wm8960 codec is not currently supported by current Pi kernel builds, upstream wm8960 has some bugs, we had fixed it. we must it build manually.
@@ -51,19 +49,30 @@ If you want to change the alsa settings, You can use `sudo alsactl --file=/etc/w
 ### Usage:
 ```bash
 #It will capture sound an playback on hw:1
-arecord -f cd -Dhw:1 | aplay -Dhw:1
+pi@raspberrypi:~ $ arecord -f cd -Dhw:1 | aplay -Dhw:1
 ```
+[Note:] "-Dhw:1" is the recording(or playback device number) , depending on your system this number may differ (for example on Raspberry Pi 0 it will be 0, since it doesn't have audio jack) We can find it via "arecord -l" and "aplay -l".
+
 
 ```bash
 #capture sound 
 #arecord -d 10 -r 16000 -c 1 -t wav -f S16_LE test.wav
-arecord -D hw:1,0 -f S32_LE -r 16000 -c 2 test.wav
+pi@raspberrypi:~ $ arecord -D hw:1,0 -f S32_LE -r 16000 -c 2 test.wav
 ```
 
 ```bash
 #play sound file test.wav
-aplay -D hw:1,0 test.wav
+pi@raspberrypi:~ $ aplay -D hw:1,0 test.wav
 ```
+
+```bash
+#configure sound settings and adjust the volume
+pi@raspberrypi:~ $ alsamixer
+```
+Please use the [F6] to select [wm8960-soundcard] device first. 
+The Left and right arrow keys are used to select the channel or device and the Up and Down Arrows control the volume for the currently selected device. Quit the program with ALT+Q, or by hitting the Esc key. More information.  
+alsamixer is a graphical mixer program for the Advanced Linux Sound Architecture (ALSA) that is used to configure sound settings and adjust the volume.   
+
 
 ### uninstall wm8960-soundcard
 If you want to upgrade the driver , you need uninstall the driver first.
